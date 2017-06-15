@@ -12,7 +12,7 @@ Running CHAIN
 Doing this should create the following folders in that directory: s-match-parent, s-match-core, s-match-io, s-match-logic, s-match-nlp, s-match-nlp-annotation, s-match-nlp-opennlp, s-match-spsm, s-match-wordnet, s-match-examples, s-match-examples, s-match-utils, s-match-spsm-prolog.
 
 
-2) In the spsm-files-needed folder, there are two .java files: PrologMappingRenderer.java & Context.java, copy over these files over to the following directories (replacing old Pversions),
+2) In the spsm-files-needed folder, there are two .java files: PrologMappingRenderer.java & Context.java, copy over these files over to the following directories (replacing old versions),
 
 PrologMappingRenderer.java ->
 spsm/s-match-source/s-match-spsm-prolog/src/main/java/uk/ac/hw/smatch/renderers/mapping
