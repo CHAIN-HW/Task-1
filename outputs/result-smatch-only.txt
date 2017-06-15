@@ -1,0 +1,4 @@
+\author	=	\author
+\author\name	<	\author
+\author	>	\author\name
+\author\name	=	\author\name
