@@ -5,6 +5,4 @@
 ./match-manager offline ../../../inputs/source.xml ../../../inputs/source.xml
 ./match-manager offline ../../../inputs/target.xml ../../../inputs/target.xml
 
-./match-manager online ../../../inputs/source.xml ../../../inputs/target.xml ../../../outputs/result-smatch-only.txt
-
 ./match-manager online ../../../inputs/source.xml ../../../inputs/target.xml ../../../outputs/result-spsm.txt -config=../conf/s-match-spsm-prolog.xml
