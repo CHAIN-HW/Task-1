@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><context>
   <node id="n0" preprocessed="true">
-    <name>author</name>
-    <label-formula>n0_0</label-formula>
-    <node-formula>n0_0</node-formula>
+    <name>reviewAuthor</name>
+    <label-formula>n0_0 &amp; n0_1</label-formula>
+    <node-formula>(n0_0 &amp; n0_1)</node-formula>
     <tokens>
       <token id="0">
+        <text>reviewauthor</text>
+        <lemma>reviewauthor</lemma>
+        <senses>
+          <sense id="n#5755527"/>
+        </senses>
+      </token>
+      <token id="1">
         <text>author</text>
         <lemma>author</lemma>
         <senses>
@@ -16,29 +23,43 @@
     </tokens>
     <children>
       <node id="n1" parent-id="n0" preprocessed="true">
-        <name>name</name>
+        <name>firstname</name>
         <label-formula>n1_0</label-formula>
-        <node-formula>n1_0 &amp; n0_0</node-formula>
+        <node-formula>n1_0 &amp; (n0_0 &amp; n0_1)</node-formula>
         <tokens>
           <token id="0">
-            <text>name</text>
-            <lemma>name</lemma>
+            <text>firstname</text>
+            <lemma>firstname</lemma>
             <senses>
-              <sense id="n#6344646"/>
-              <sense id="n#14462254"/>
-              <sense id="n#7988726"/>
-              <sense id="n#10364174"/>
-              <sense id="n#1141957"/>
-              <sense id="n#6733713"/>
-              <sense id="v#1030757"/>
-              <sense id="v#1028104"/>
-              <sense id="v#2401858"/>
-              <sense id="v#2401347"/>
-              <sense id="v#949471"/>
-              <sense id="v#1026199"/>
-              <sense id="v#654017"/>
-              <sense id="v#947885"/>
-              <sense id="v#647205"/>
+              <sense id="n#6348677"/>
+            </senses>
+          </token>
+        </tokens>
+      </node>
+      <node id="n2" parent-id="n0" preprocessed="true">
+        <name>lastname</name>
+        <label-formula>n2_0</label-formula>
+        <node-formula>n2_0 &amp; (n0_0 &amp; n0_1)</node-formula>
+        <tokens>
+          <token id="0">
+            <text>lastname</text>
+            <lemma>lastname</lemma>
+            <senses>
+              <sense id="n#6348274"/>
+            </senses>
+          </token>
+        </tokens>
+      </node>
+      <node id="n3" parent-id="n0" preprocessed="true">
+        <name>review</name>
+        <label-formula>n3_0</label-formula>
+        <node-formula>n3_0 &amp; (n0_0 &amp; n0_1)</node-formula>
+        <tokens>
+          <token id="0">
+            <text>review</text>
+            <lemma>review</lemma>
+            <senses>
+              <sense id="n#5755527"/>
             </senses>
           </token>
         </tokens>

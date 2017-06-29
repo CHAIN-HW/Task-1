@@ -21,11 +21,15 @@ public class Call_SPSM{
 		Call_SPSM classInst = new Call_SPSM();
 		
 		ArrayList<Match_Struc> result = new ArrayList<Match_Struc>();
-		classInst.getSchemas(result,null,null);
+		String source = "auto(brand,name,color)";
+		String target = "car(year,brand,colour)";
+		result = classInst.getSchemas(result,source,target);
 		
 		//then lets see if we can read the results from our new structure
 		//and print them out to the console for the user
-		if(result.size() == 0){
+		if(result == null){
+			System.out.println("No Results Returned!!");
+		}else if(result.size() == 0){
 			System.out.println("No Matches.");
 		}else{
 			for(int i = 0 ; i < result.size() ; i++){
@@ -50,7 +54,7 @@ public class Call_SPSM{
 	
 	//get the schemas from the user, either through the console or as a parameter
 	//when this method gets called
-	public void getSchemas(ArrayList<Match_Struc> results, String srcSchema, String targetSchema){
+	public ArrayList<Match_Struc> getSchemas(ArrayList<Match_Struc> results, String srcSchema, String targetSchema){
 
 		//if we haven't been passed the schemas as params
 		//then get them through the command line
@@ -103,20 +107,29 @@ public class Call_SPSM{
 					continue;
 				}else{
 					//then call SPSM & store results
-					makeCallToSPSM();
-					recordSerialisedResults(results,currTarget);
+					results = makeCallToSPSM(results,currTarget);
 				}
 			}
 			
 		}catch(Exception e){
 			e.printStackTrace();
-		}		
+		}
+		
+		return results;
 		
 	}
 	
 	//makes call to SPSM through using .sh file
-	public void makeCallToSPSM(){
+	public ArrayList<Match_Struc> makeCallToSPSM(ArrayList<Match_Struc> results, String currTarget){
 		System.out.println("Calling SPSM");
+		
+		//first clean the files
+		try {
+			new PrintWriter("outputs/serialised-results.ser").close();
+			new PrintWriter("outputs/result-spsm.txt").close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//call SPSM by executing the appropriate bash file
 		try {
@@ -127,38 +140,45 @@ public class Call_SPSM{
 			//it to finish before terminating the program
 			final Process p = pb.start();
 			p.waitFor();
+			
+			//recordSerialisedResults(results,currTarget);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return recordSerialisedResults(results,currTarget);
 	}
 	
 	//then record the results from the .ser file returned from spsm
 	@SuppressWarnings("unchecked")
-	public void recordSerialisedResults(ArrayList<Match_Struc> results,String targetSchema){
+	public ArrayList<Match_Struc> recordSerialisedResults(ArrayList<Match_Struc> results,String targetSchema){
 		System.out.println("Recording Results");
 		
 		//get the serialised content from the .ser file
 		//and store it in a IContextMapping object var
-		IContextMapping<INode> mapping = null;
+		IContextMapping<INode> mapping=null;
 		
 		//read in the object
 		try{
-			FileInputStream fIn = new FileInputStream("outputs/serialised-results.ser");
+			File resFile = new File("outputs/serialised-results.ser");
+			FileInputStream fIn = new FileInputStream(resFile);
 			ObjectInputStream inStream = new ObjectInputStream(fIn);
 			
-			mapping = (IContextMapping<INode>) inStream.readObject();
+			mapping = (IContextMapping<INode>) inStream.readObject();	
 			
 			inStream.close();
 			fIn.close();
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Error reading results, returning null.");
+			return null;
 		}
 		
-		
-		///////////////////////////////////////////////////////////////////////////////////
-		
-		
+		return readObject(results,targetSchema,mapping);
+	}
+	
+	public ArrayList<Match_Struc> readObject(ArrayList<Match_Struc> results, String targetSchema, IContextMapping<INode> mapping){
 		//start picking data out of the object for this target
 		Match_Struc newMatch;
 	
@@ -169,6 +189,7 @@ public class Call_SPSM{
 		
 		//loop through each of the individual matching elements w relations
 		for (IMappingElement<INode> mappingElement : mapping) {
+			//System.out.println("Looping through a single match ");
 			String sourceConceptName = getNodePathString(mappingElement.getSource());
 			String targetConceptName = getNodePathString(mappingElement.getTarget());
 			String relation = Character.toString(mappingElement.getRelation());
@@ -182,6 +203,8 @@ public class Call_SPSM{
 		if(newMatch.getNumMatches() != 0){
 			results.add(newMatch);
 		}
+		
+		return results;
 		
 	}
 	

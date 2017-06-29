@@ -15,6 +15,8 @@ public class Match_Struc{
 	private double similarity;
 	private String dataset;
 	private ArrayList<String[]> matches;
+	private Node repairedSchemaTree;
+	private String repairedSchema;
 	private int numMatches;
 	
 	//constructor
@@ -23,6 +25,8 @@ public class Match_Struc{
 		dataset=targetSchema;
 		matches=new ArrayList<String[]>();
 		numMatches=0;
+		repairedSchemaTree=null;
+		repairedSchema="";
 	}
 	
 	//public methods
@@ -57,5 +61,21 @@ public class Match_Struc{
 	
 	public String[] getMatchAtIndex(int index){
 		return matches.get(index);
+	}
+	
+	public void setRepairedSchemaTree(Node schemaTree){
+		repairedSchemaTree = schemaTree;
+	}
+	
+	public void setRepairedSchema(String stringSchema){
+		repairedSchema = stringSchema;
+	}
+	
+	public String getRepairedSchema(){
+		return repairedSchema;
+	}
+	
+	public Node getRepairedSchemaTree(){
+		return repairedSchemaTree;
 	}
 }

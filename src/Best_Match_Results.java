@@ -63,7 +63,7 @@ public class Best_Match_Results {
 			}
 		}
 		
-		System.out.println(filteredList.size());
+
 		return sortResultingMatches(filteredList,limitNo);
 	}
 	
