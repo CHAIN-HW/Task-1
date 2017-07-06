@@ -1,12 +1,10 @@
 import java.io.File;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 /*
  * Responsible for testing the Best_Match_Results.java file

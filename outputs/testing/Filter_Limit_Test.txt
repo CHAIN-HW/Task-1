@@ -1,7 +1,7 @@
 Testing Results for Best_Match_Results.java
 
 Test 1
-Calling with threshold: 1.0 & limit: 5 on a single match 
+Calling with threshold: 1.0 & limit: 5 on multiple matches 
 Expected Result: results.size() == 0 
 Actual Result: results.size() == 0
 
@@ -16,7 +16,7 @@ Expected Result: results.size() == 4
 Actual Result: results.size() == 4
 
 Test 4
-Calling with threshold: 0.2 & limit: 5 on a single match 
+Calling with threshold: 0.2 & limit: 5 on multiple matches 
 Expected Result: results.size() == 4 
 Actual Result: results.size() == 4
 
@@ -31,7 +31,7 @@ Expected Result: results.size() == 0
 Actual Result: results.size() == 0
 
 Test 7
-Calling with threshold: 0.2 & limit: 3 on a single match 
+Calling with threshold: 0.2 & limit: 3 on multiple matches 
 Expected Result: results.size() == 3 
 Actual Result: results.size() == 3
 

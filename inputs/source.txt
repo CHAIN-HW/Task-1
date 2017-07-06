@@ -1,1 +1,1 @@
-author(name)
+auto(brand,name,color)
