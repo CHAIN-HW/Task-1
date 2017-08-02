@@ -18,6 +18,7 @@ public class Match_Struc{
 	private Node repairedSchemaTree;
 	private String repairedSchema;
 	private int numMatches;
+	private String query;
 	
 	//constructor
 	public Match_Struc(double sim, String targetSchema){
@@ -27,6 +28,7 @@ public class Match_Struc{
 		numMatches=0;
 		repairedSchemaTree=null;
 		repairedSchema="";
+		query="";
 	}
 	
 	//public methods
@@ -77,5 +79,13 @@ public class Match_Struc{
 	
 	public Node getRepairedSchemaTree(){
 		return repairedSchemaTree;
+	}
+	
+	public void setQuery(String matchQuery){
+		query=matchQuery;
+	}
+	
+	public String getQuery(){
+		return query;
 	}
 }

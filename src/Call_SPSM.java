@@ -10,8 +10,9 @@ import it.unitn.disi.smatch.data.trees.INode;
  * target and source schema before calling SPSM with these schemas
  * it will then store the results as an ArrayList of Match_Struc objects
  * 
+ * This class is tested in SPSM_Test_Cases.java & SPSM_Filter_Results_Test_Cases.java
+ * 
  */
-
 public class Call_SPSM{
 	
 	private String[] targetList;
@@ -21,21 +22,26 @@ public class Call_SPSM{
 		Call_SPSM classInst = new Call_SPSM();
 		
 		ArrayList<Match_Struc> result = new ArrayList<Match_Struc>();
-		String source = "auto(brand,name,color)";
-		String target = "car(year,brand,colour)";
+		String source = "author(name)";
+		String target = "paperWriter(firstname,lastname,paper)";
+		
+		source="author(name)";
+		target="document(title,author) ; author(name,document) ; reviewAuthor(firstname,lastname,review)";
 		result = classInst.getSchemas(result,source,target);
 		
 		//then lets see if we can read the results from our new structure
 		//and print them out to the console for the user
+		System.out.println("\nSource: " + source);
+		System.out.println("Target: " + target);
+		
 		if(result == null){
-			System.out.println("No Results Returned!!");
+			System.out.println("No Results Returned from SPSM!");
 		}else if(result.size() == 0){
 			System.out.println("No Matches.");
 		}else{
 			for(int i = 0 ; i < result.size() ; i++){
 				Match_Struc currMatch = result.get(i);
-				System.out.println("");
-				System.out.println("Result Number "+(i+1)+": "+currMatch.getDatasetSchema());
+				System.out.println("\nResult Number "+(i+1)+": "+currMatch.getDatasetSchema());
 				System.out.println("Has a similarity of "+currMatch.getSimValue());
 				System.out.println("And " + currMatch.getNumMatches() + " matche(s)");
 
@@ -152,7 +158,7 @@ public class Call_SPSM{
 	//then record the results from the .ser file returned from spsm
 	@SuppressWarnings("unchecked")
 	public ArrayList<Match_Struc> recordSerialisedResults(ArrayList<Match_Struc> results,String targetSchema){
-		System.out.println("Recording Results");
+		System.out.println("Recording Results from SPSM");
 		
 		//get the serialised content from the .ser file
 		//and store it in a IContextMapping object var
@@ -171,7 +177,7 @@ public class Call_SPSM{
 			
 		}catch(Exception e){
 			//e.printStackTrace();
-			System.out.println("Error reading results, returning null.");
+			System.out.println("Error reading results from SPSM, returning null.");
 			return null;
 		}
 		
@@ -205,7 +211,6 @@ public class Call_SPSM{
 		}
 		
 		return results;
-		
 	}
 	
 	//used by recordSerialisedResults to return string

@@ -6,6 +6,8 @@ import java.util.*;
  * determined threshold, cut the number of results to the
  * desired n and sort so that the match with the highest
  * similarity is at the top of the list
+ * 
+ * This class is tested in Match_Results_Test_Cases.java & SPSM_Filter_Results_Test_Cases.java
  */
 public class Best_Match_Results {
 	
@@ -27,12 +29,20 @@ public class Best_Match_Results {
 		results.add(new Match_Struc(0.4,"author(name,document)"));
 		results.add(new Match_Struc(0.5,"author(name,document)"));
 		
-		instance.getThresholdAndFilter(results,null,0);
+		results = instance.getThresholdAndFilter(results,0.3,0);
+		
+		System.out.println("\nResults after filtering:");
+		for(int i = 0 ; i < results.size() ; i++){
+			Match_Struc current = results.get(i);
+			System.out.println(current.getDatasetSchema() + " similarity: " + current.getSimValue());
+		}
 	}
 	
 	//start off by taking in the results, threshold value and the number of results wanted
 	//if these values haven't been passed in through params, then ask user to enter in console
 	public ArrayList<Match_Struc> getThresholdAndFilter(ArrayList<Match_Struc> results, Double threshVal, int limNum){
+		System.out.println("Filtering results from SPSM");
+		
 		Double thresholdVal;
 		int limitNo;
 		
@@ -62,7 +72,6 @@ public class Best_Match_Results {
 				filteredList.add(currMatch);
 			}
 		}
-		
 
 		return sortResultingMatches(filteredList,limitNo);
 	}
@@ -82,8 +91,6 @@ public class Best_Match_Results {
 		if(limitNo != 0 && filteredRes.size() >= limitNo){
 			filteredRes = new ArrayList<Match_Struc>(filteredRes.subList(0, limitNo));
 		}
-		
-		//displayResults(filteredRes);
 		
 		return filteredRes;
 	}

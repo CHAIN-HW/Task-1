@@ -10,5 +10,4 @@ import org.junit.runners.Suite.SuiteClasses;
 		SPSM_Test_Cases.class })
 
 public class Task1_Test_Suite {
-
 }
